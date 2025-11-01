@@ -8,6 +8,6 @@ Terminal inline calculator for +-*/
 4. keep your calculation inside quotes (""), and don't worry about spaces.
 
 next to add:
-- exponential
-- square root
+- get float result of square roots
 - parentheses
+- scientific notation results
