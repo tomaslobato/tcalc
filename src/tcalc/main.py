@@ -68,16 +68,16 @@ def multdiv(tokens: list):
             n1 = to_number(tokens[i-1])
             n2 = to_number(tokens[i+1])
 
-            if tokens[i] == "*":
-                newvalue = n1 * n2
-            elif tokens[i] == "/":
-                newvalue = n1 / n2
-            elif tokens[i] == "^":
+            if tokens[i] == "^":
                 u = 1
                 newvalue = n1
                 while u < n2:  # multiply by itself n2 times
                     newvalue = newvalue * n1
                     u += 1
+            elif tokens[i] == "*":
+                newvalue = n1 * n2
+            elif tokens[i] == "/":
+                newvalue = n1 / n2
 
             # replace where n1 and n2 were for the result of it's calculation
             tokens[i-1:i+2] = [str(newvalue)]
