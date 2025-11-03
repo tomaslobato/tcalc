@@ -57,9 +57,31 @@ def separate(q: str):
 
 def multdiv(tokens: list):
     i = 0
-
     while i < len(tokens):
-        if tokens[i] in "*/^":
+        if tokens[i] == "^":
+            n1 = to_number(tokens[i-1])
+            n2 = to_number(tokens[i+1])
+            u = 1
+            newvalue = n1
+            while u < n2:  # multiply by itself n2 times
+                newvalue = newvalue * n1
+                u += 1
+
+            tokens[i-1:i+2] = [str(newvalue)]
+        else:
+            i += 1
+
+    i = 0
+    while i < len(tokens):
+        if tokens[i] == "^":
+            n1 = to_number(tokens[i-1])
+            n2 = to_number(tokens[i+1])
+            u = 1
+            newvalue = n1
+            while u < n2:  # multiply by itself n2 times
+                newvalue = newvalue * n1
+                u += 1
+        elif tokens[i] in "*/":
             # safety check: Binary operators - need tokens before and after it
             if i == 0 or i + 1 >= len(tokens):
                 i += 1
@@ -68,13 +90,7 @@ def multdiv(tokens: list):
             n1 = to_number(tokens[i-1])
             n2 = to_number(tokens[i+1])
 
-            if tokens[i] == "^":
-                u = 1
-                newvalue = n1
-                while u < n2:  # multiply by itself n2 times
-                    newvalue = newvalue * n1
-                    u += 1
-            elif tokens[i] == "*":
+            if tokens[i] == "*":
                 newvalue = n1 * n2
             elif tokens[i] == "/":
                 newvalue = n1 / n2
