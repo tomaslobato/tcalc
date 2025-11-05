@@ -1,5 +1,5 @@
 # tcalc
-Terminal inline calculator for +-*/
+Simple terminal inline calculator
 
 ### Install & Usage:
 1. Download latest [release](https://github.com/tomaslobato/tcalc/releases/) (.whl file) 
