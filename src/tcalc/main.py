@@ -1,7 +1,7 @@
 import argparse
 
 DIGITS = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", " "}
-OPERANDS = {"+", "-", "*", "/", "^", "√"}
+OPERANDS = {"+", "-", "*", "/", "^", "√", "(", ")"}
 
 
 def validate_str(text):
@@ -144,6 +144,28 @@ def addsub(tokens: list):
     return tokens
 
 
+def parenth(tokens: list):
+    i = 0
+    while i < len(tokens):
+        if tokens[i] == "(":
+            parenth_tokens = []
+            start = i  
+            i += 1 # start from the number, not the (
+            while tokens[i] != ")":
+                parenth_tokens.append(tokens[i])
+                i += 1
+            end = i + 1
+
+            parenth_result = multdiv(parenth_tokens)
+            parenth_result = addsub(parenth_result)
+            tokens[start:end] = parenth_result # take out the () and the numbers in them
+            i = 0
+            continue # restart the loop, look for more "("
+        else: i += 1
+
+    return tokens # when no more (), return it
+
+
 def calculate(q: str):
     try:
         validate_str(q)
@@ -151,9 +173,10 @@ def calculate(q: str):
         print(e)
         return
     separated = separate(q)
-    multdiv_result = multdiv(separated)
-    addsub_result = addsub(multdiv_result)
-    print(addsub_result[0])
+    result = parenth(separated)
+    result = multdiv(result)
+    result = addsub(result)
+    print(result[0])
 
 
 def main():

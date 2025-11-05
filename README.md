@@ -9,5 +9,5 @@ Terminal inline calculator for +-*/
 
 next to add:
 - get float result of square roots
-- parentheses
 - scientific notation results
+- parentheses in parentheses
